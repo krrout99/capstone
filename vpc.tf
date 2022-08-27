@@ -1,21 +1,31 @@
+# Create a VPC using AWS VPC Terraform Module
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "3.14.0"
 
-  name = "capstone_final"
-  cidr = "10.0.0.0/16"
+  # VPC Basic Details
+  name = "${var.vpc_name}"
+  cidr = var.vpc_cidr_block
+  azs             = var.vpc_availability_zones
+  public_subnets  = var.vpc_public_subnets
+  private_subnets = var.vpc_private_subnets  
 
-  azs             = ["us-east-1a", "us-east-1b"]
-  private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
-  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24"]
+  # NAT Gateways - Outbound Communication
+  enable_nat_gateway = var.vpc_enable_nat_gateway 
+  single_nat_gateway = var.vpc_single_nat_gateway
 
-  enable_nat_gateway = true
-  enable_vpn_gateway = false
+  
+  # Setup Tags
+  tags = local.common_tags
+  vpc_tags = local.common_tags
 
-  tags = {
-    Terraform = "true"
-    Environment = "dev"
+  # Add Tags to Subnets
+  public_subnet_tags = {
+    Type = "Public Subnets"
+    "kubernetes.io/role/elb" = 1
   }
+  private_subnet_tags = {
+    Type = "Private Subnets"
+    "kubernetes.io/role/internal-elb" = 1
+  }  
 }
-~  
-Footer
-© 2022 GitHub, In

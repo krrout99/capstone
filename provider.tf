@@ -1,20 +1,20 @@
-# Set AWS as the provider
+# Set AWS as the provider 
 terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "4.20.1"
+      version = "4.14.0"  
     }
   }
-  # Use S3 bucket called 'kunal-terraform-backend' as Terraform Backend
+# Use S3 bucket called 'capstone-backend' as Terraform Backend
   backend "s3" {
-    bucket = "kunal-terraform-backend"
-    key    = "assignment/tfstate"
+    bucket = "kunalcapstone"
+    key    = "capstone/tfstate"
     region = "us-east-1"
   }
 }
 
 # Setup the AWS Provider Block
 provider "aws" {
-  region  = "us-east-1"
+  region  = var.aws_region
 }

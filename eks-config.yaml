@@ -7,21 +7,21 @@ metadata:
   region: us-east-1
   version: "1.20" # kubernetes version
 vpc: # Refer: https://github.com/weaveworks/eksctl/blob/main/examples/04-existing-vpc.yaml
-  id: "vpc-01dfcbddeaea1123b"
+  id: "vpc-042aeb80536332394"
   subnets:
     public:
       my-public-201-a:
-        id: "subnet-0b5557e2e06d1a46e"
+        id: "subnet-0c4c5b62f1c25e052"
         az: "us-east-1a"
       my-public-201-b:
-        id: "subnet-03751880eab2d831d"
+        id: "subnet-0a025ffdbf7e298d4"
         az: "us-east-1b"
     private:
       my-private-201-a:
-        id: "subnet-0b34d5675baa0dbee"
+        id: "subnet-03d5fe83e82ed7cc8"
         az: "us-east-1a"
       my-private-201-b:
-        id: "subnet-00bbb9b6e20647e4d"
+        id: "subnet-0b044ebda4410bd1e"
         az: "us-east-1b"
   clusterEndpoints:
     publicAccess:  true
@@ -74,7 +74,7 @@ nodeGroups: # Refer: https://github.com/weaveworks/eksctl/blob/main/examples/05-
       instanceTypes:
         - t2.medium
     desiredCapacity: 1
-    minSize: 1
+    minSize: 0
     maxSize: 3
     privateNetworking: true # include only in private subnet
     subnets:
@@ -87,8 +87,8 @@ nodeGroups: # Refer: https://github.com/weaveworks/eksctl/blob/main/examples/05-
     instancesDistribution:
       instanceTypes:
         - t2.medium
-    desiredCapacity: 1
-    minSize: 1
+    desiredCapacity: 0
+    minSize: 0
     maxSize: 1
     subnets:
       - my-public-201-a
